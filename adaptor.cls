@@ -102,8 +102,20 @@ ClassMethod Setup()
 	         	write "distinct(count)= ",distinct(count)
 	         	set count = $INCREMENT(count)
 	         }
+
+    do ..Max(.joltages)
 }
 
+ClassMethod Max(ByRef joltages As %ArrayOfDataTypes)
+{
+    for i=1:1:joltages{
+        set max(+$GET(joltages(i)))=i }
+        set i="",
+        max=$o(max(i),-1,i) 
+        Q $lb(max,1)
+}
+
+/// Description
 Storage Default
 {
 <Data name="AdaptorDefaultData">
@@ -113,6 +125,8 @@ Storage Default
 </Data>
 <DataLocation>^Missing.AdaptorD</DataLocation>
 <DefaultData>AdaptorDefaultData</DefaultData>
+<Description>
+<![CDATA[Description]]></Description>
 <IdLocation>^Missing.AdaptorD</IdLocation>
 <IndexLocation>^Missing.AdaptorI</IndexLocation>
 <StreamLocation>^Missing.AdaptorS</StreamLocation>
