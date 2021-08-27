@@ -1,9 +1,9 @@
 /// Class definition to find the maximum differences for the adaptor voltages
-Class Missing.Adaptor Extends %Persistent
+Class Missing.Joltages Extends %ArrayOfDataTypes
 {
 
 /// Set up the joltages array that will hold the hold the lines that are available for us
-ClassMethod Setup()
+ClassMethod SetArray(element, key As %String) As %Status
 {
     set joltages=##class(%ArrayOfDataTypes).%New()
         do joltages.SetAt("39","1")
@@ -11,10 +11,15 @@ ClassMethod Setup()
         do joltages.SetAt("77","3")
         do joltages.SetAt("85","4")
         do joltages.SetAt("103","5")
-           
-            
+        
+    do ..Verification(.joltages)
+}
+
+ClassMethod Verification(ByRef joltages As %ArrayOfDataTypes) As %Status
+{
+
     // We iter over the joltages to find out if the numbers are of a valid type and to determine the maximum joltages within the array     
-    for i=1:1:joltages.Count() { 
+    for i=1:1:5 { 
         write !, "Is valid number? (1 is Yes 0 is No): ",$ISVALIDNUM(joltages.GetAt(i))
         set key = joltages.Find("103","")
         write *32 ,!
@@ -30,10 +35,11 @@ ClassMethod Setup()
         
     }
 
-    do ..partOne(.joltages,bij)
+    do ..partOne(.joltages,.bij)
 }
 
-ClassMethod partOne(ByRef joltages As %ArrayOfDataTypes, ByRef bij As %String) As %Status
+/// Description
+ClassMethod partOne(ByRef joltages As %ArrayOfDataTypes, ByRef bij As %Integer) As %Status
 {
     // set my variables
     set oneJolt= 0
@@ -89,7 +95,7 @@ ClassMethod partOne(ByRef joltages As %ArrayOfDataTypes, ByRef bij As %String) A
     do ..partTwo(.joltages)
 }
 
-ClassMethod partTwo(ByRef joltages As %ArrayOfDataTypes)
+ClassMethod partTwo(ByRef joltages As %ArrayOfDataTypes) As %Status
 {
     write *32 ,!
     write "Part Two:",!
@@ -126,6 +132,15 @@ Storage Default
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
+<Value name="2">
+<Value>Phone</Value>
+</Value>
+<Value name="3">
+<Value>Bul</Value>
+</Value>
+<Value name="4">
+<Value>builtInJoltage</Value>
+</Value>
 </Data>
 <DataLocation>^Missing.AdaptorD</DataLocation>
 <DefaultData>AdaptorDefaultData</DefaultData>
@@ -133,6 +148,11 @@ Storage Default
 <IndexLocation>^Missing.AdaptorI</IndexLocation>
 <StreamLocation>^Missing.AdaptorS</StreamLocation>
 <Type>%Storage.Persistent</Type>
+}
+
+Storage Custom
+{
+<Type>%Library.CompleteCustomStorage</Type>
 }
 
 }
