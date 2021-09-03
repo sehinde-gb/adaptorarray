@@ -96,6 +96,8 @@ ClassMethod partOne(ByRef joltages As %ArrayOfDataTypes, ByRef bij As %Integer) 
     do ..partTwo(.joltages)
 }
 
+// Subtract the differences in joltage ratings and add these to an array
+
 ClassMethod partTwo(ByRef joltages As %ArrayOfDataTypes) As %Status
 {
     write *32 ,!
