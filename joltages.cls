@@ -15,6 +15,7 @@ ClassMethod SetArray(element, key As %String) As %Status
     do ..Verification(.joltages)
 }
 
+/// Verify that we have the correct Joltages in the number format
 ClassMethod Verification(ByRef joltages As %ArrayOfDataTypes) As %Status
 {
 
@@ -38,7 +39,7 @@ ClassMethod Verification(ByRef joltages As %ArrayOfDataTypes) As %Status
     do ..partOne(.joltages,.bij)
 }
 
-/// Description
+/// Pass through the joltages and see if the ratings are correct
 ClassMethod partOne(ByRef joltages As %ArrayOfDataTypes, ByRef bij As %Integer) As %Status
 {
     // set my variables
