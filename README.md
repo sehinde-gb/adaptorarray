@@ -1,7 +1,7 @@
 
 ## Advent of Code 2020 Day10
 
-- Day 11: Adaptor Array
+- Day 10: Adaptor Array
 
 
 ## Description
